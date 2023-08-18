@@ -1,0 +1,64 @@
+NC = 3
+NR = 2
+TW = 133
+TH = 150
+l = 0
+j = 1
+arr = []
+for i in range(NC*NR):
+    print(i)
+    if i < 3:
+        newClip = (TW*i, 0, TW, TH)
+        arr.append(newClip)
+    else:
+        newClip = (TW*l, TH, TW, TH)
+        arr.append(newClip)
+        l += 1
+
+print(arr)
+
+global shufflecount
+    scorearr = []
+    moves = 0
+    # sets the number of rows and columns
+    NR = 2
+    NC = 3
+    # values for screen width and height for easy variation
+    SW = 400
+    IH = 300
+    SH = IH + 100
+    TW = SW // NC
+    TH = IH // NR
+    pygame.init()
+    # sets the logo and caption for the program
+    logo = pygame.image.load("wave.png")
+    pygame.display.set_icon(logo)
+    pygame.display.set_caption("Puzzle Game")
+
+    # sets the screen width and height
+    screen = pygame.display.set_mode((SW, SH))
+
+    # loads a black background image
+    bgd = pygame.image.load("black.png")
+    screen.blit(bgd, (0, 0))
+    
+    image = pygame.image.load("fireworks.png")
+
+    # SORT HIGHSCORES HERE
+    
+    # creates the initial clips of the image and blits it to the screen
+    def blitgrid(grid):
+        global blitcounter
+        global shufflecount
+        global running
+        clips = []
+        clipcount = 0
+        for i in range(NR*NC):
+            if i < 3:
+                newClip = (TW*i, 0, TW, TH)
+                clips.append(newClip)
+            else:
+                newClip = (TW*clipcount, 0, TW, TH)
+                clips.append(newClip)
+                clipcount += 1
+        print(clips)
