@@ -1,0 +1,585 @@
+import time as t
+import math as m
+import random as r
+import array as a
+
+def Paint():
+  measurement = input("What measurement do you use? (ft/m) ")
+
+  top = input("Do you want to paint the floor, cieling, both or none? (1,2,3,4) ")
+
+  width = float(input("How wide is the room?  "))
+  height = float(input("How High is the room?  "))
+  length = float(input("How long is the room?  "))
+
+  paintCan = 12
+  total = 0
+
+  Top = width * length
+  Walls = (width * height * 2) + (length * height * 2)
+
+
+
+  if top == 1 or 2:
+    total = Walls + Top
+  if top == 3:
+    total = Walls + (Top * 2)
+  if top == 4:
+    total = Walls
+
+  print("Your painting area is", str(total)+ measurement+ "²")
+
+  if measurement == "m":
+    canSize = 14
+  if measurement =="ft":
+    canSize = 45.9318
+
+  NoCan = (total // canSize) + (total % canSize > 0)
+
+  cost = NoCan * 12
+
+  print("You will need", NoCan, "Cans")
+  print("This will cost £" +str(cost))
+  time.sleep(1)
+  menu()
+
+def Mileage():
+  mileageOld = int(input("What was the mileage the last time the car was filled?  "))
+  mileageNew = int(input("What is the mileage now?  "))
+  litres = int(input("How many Litres did it take to fill the tank?  "))
+
+  mileage = mileageNew - mileageOld
+  mpg = mileage / (litres * 0.22)
+  dpmpg = "{:.2f}".format(mpg)
+  print("Your can runs at " +str(dpmpg)+ "mpg")
+  time.sleep(1)
+  menu()
+
+def BookShare():
+  NoStudents = int(input("How many students need books?  "))
+  NoBooks = int(input("How many books are there?  "))
+
+  Booksshared = NoBooks // NoStudents
+  BooksLeft = NoBooks % NoStudents
+  
+  if Booksshared < 1:
+    print("There are not enough books to give to every student")
+    time.sleep(1)
+    menu()
+  else:
+    print("Each student gets", Booksshared, "Books.", "There are", BooksLeft, "Books left")
+    time.sleep(1)
+    menu()
+
+def length():
+  name = input("Enter a name?  ")
+  length = len(name)
+  print("The name", name, "is " +str(length)+ " letters long")
+  time.sleep(1)
+  menu()
+
+def PoundsKilos():
+  pounds = int(input("Enter a value in lbs  "))
+  kilos = int(input("Enter a value in kilos  "))
+
+  k2p = kilos * 2.20462
+  p2k = pounds * 0.453592
+  
+  print(" ")
+  print("Pounds -> Kilos =", p2k)
+  print("Kilos -> Pounds =", k2p)
+  time.sleep(1)
+  menu()
+
+def DigitSplit():
+  number = int(input("Enter a 3 digit number  "))
+  number = str(number)
+  
+  h = number[0]
+  t = number[1]
+  u = number[2]
+
+  print("There are", h, "Hundred(s),", t, "Ten(s) and", u, "Unit(s)")
+  time.sleep(1)
+  menu()
+
+def Passwordlen():
+  pword = input("Enter a password  ")
+  length = len(pword)
+  
+  print("The password is", length, "letters long")
+  time.sleep(1)
+  menu()
+
+def bricksinhouse():
+  metres2 = 0
+  area = 0
+  NoWalls = int(input("How many walls are in your house?  "))
+  for i in range(NoWalls):
+    metres2 = float(input("How many meters squared is wall " +str(i)+ "   "))
+    area += metres2
+  bricks = area * 120
+  print("You need", bricks, "bricks to build your house")
+
+def Pupilage():
+  age = int(input("What is the pupil's age?  "))
+  if age > 10 and age < 19:
+    print("Valid pupil age")
+  else:
+    print("Invalid pupil age")
+  time.sleep(1)
+  menu()
+
+def OrderValue():
+  postage = 0
+  total = 0
+  Ordervalue = float(input("How much was your order?  "))
+  ndd = input("Guaranteed next day delivery? (y/n)  ")
+  
+  if ndd == "y":
+    postage = 5
+    total = postage + Ordervalue
+    print("Your postage costs £" +str(postage)+ " and your total order cost is now £" +str(total))
+  elif Ordervalue > 15:
+    print("Your postage costs £" +str(postage)+ " and your total order cost is now £" +str(Ordervalue))
+  else:
+    postage = 3.5
+    total = postage + Ordervalue
+    print("Your postage costs £" +str(postage)+ " and your total order cost is now £" +str(total))
+
+def Examresults():
+  mark = int(input("What mark did you get out of 100?  "))
+  Attendance = int(input("What percentage of school days did you attend?  "))
+
+  if Attendance <= 90:
+    print("You failed")
+  elif mark > 90:
+    print("You got an A")
+  elif mark > 80 and mark <= 90:
+    print("You got a B")
+  elif mark >70 and mark <= 80:
+    print("You got a C")
+  else:
+    print("You failed")
+
+def Alarm():
+  armedask = input("Is the alarm armed? (y/n)  ")
+  if armedask == "y":
+    armed = True
+  else:
+    armed = False
+    print("Welcome Back!")
+
+  Trigger = False
+
+  if armed == True:
+    while Trigger == False:
+      TNo = r.randint(1,600)
+      print(TNo)
+    
+      if TNo == 175:
+        Trigger = True
+      if Trigger == True:
+        print("Alarm Triggered!")
+
+def Barcode():
+  old = 0
+  new = 0
+  x = 0
+  while x == 0:  
+    BC = input("Enter a 4 digit number  ")
+    length = len(BC)
+    if length == 4:
+      if BC != "9999":
+        if BC[3] == "6" or BC[3] == "7" or BC[3] == "8":
+          old += 1
+        else:
+          new += 1
+      else:
+        print("Terminated")
+        print("New Parts = ", new)
+        print("Old Parts = ", old)
+        break
+    else:
+      print("Error")  
+ 
+def testprint():
+  to1 = 0
+  to2 = 0
+  to3 = 0
+  for i in range(30):
+    t1 = r.randint(1,100)
+    t2 = r.randint(1,100)
+    t3 = r.randint(1,100)
+    to1 += t1
+    to2 += t2
+    to3 += 23
+  a1 = to1 / 30
+  a2 = to2 / 30
+  a3 = to3 / 30
+  ya = (a1 + a2 + a3) / 3
+  print("Average score for test 1 - ", a1)
+  print("Average score for test 2 - ", a2)
+  print("Average score for test 3 - ", a3)
+  print("Average score for the year - ", ya)
+
+def Hlight():
+  x = 1
+  while x == 1:
+    onoff = input("Switch ON or Turn OFF?  ")
+    if onoff == "OFF":
+      break
+    else:
+      while onoff == "ON":
+        p = r.randint(10,100)
+        p = p / 1000
+        t.sleep(p) 
+
+def arraynum():
+  total = 0
+  num = [0,0,0,0,0,0]
+  for i in range(6):
+    num[i] = int(input("Enter a number  "))
+    total += num[i]
+  avg = total / 6
+  num.reverse()
+  print(num)
+  print(avg)
+  print(total)
+
+def pupilname():
+  names = ["Daniel","Jowan","Jack","Lulu","Jeff","Gabriel","John","Mark","David","Sasha","Sam","Rachelle","Nahum","Adam","Apple","Banana","Johnonothon","James","Jheofferry","Aadam","Fhilip"]
+  name = input("Enter pupil name  ")
+  if name in names:
+    rec_no = names.index(name) + 1
+    print(rec_no)
+
+def TwoDArray():
+  rows, cols = (10, 10) 
+  arr = [[0 for i in range(cols)] for j in range(rows)] 
+  baby = r.randint(0, 9)
+  parent = r.randint(0,9)
+  arr[parent][baby] = 1
+  
+  guess = input("Enter a coordinate in the form 1, 1 ")
+  guessS = guess.split(", ")
+  
+  g1 = int(guessS[0]) 
+  g2 = int(guessS[1])
+  g1 -= 1
+  g2 -= 1
+  
+  if arr[parent][baby] == arr[g2][g1]:
+    print("You found it! ")
+    for row in arr: 
+      print(row) 
+  else:
+    print("Unlucky! You died ")
+    for row in arr: 
+      print(row) 
+
+def SaleQuantities():
+  quarters, outs = (4, 50)
+  arr = [[r.randint(1,100) for i in range(outs)]for j in range(quarters)]
+  total = [0,0,0,0]
+  for k in range(4):
+    for l in range(50):  
+      total[k] += arr[k][l]
+  print(total)
+
+def carpark():
+  rows, cols = (10, 6)
+  arr = [["empty" for i in range(cols)]for j in range(rows)]
+  park = True
+  while park == True:  
+    cont = int(input("Continue Parking?  "))
+    if cont == 0:
+      park = False
+    else:  
+      plate = input("Enter your reg number  ")
+      space = input("Enter your space coordinate  ")
+      Space = space.split(", ")
+      print(space)
+      space1 = int(Space[0])
+      space2 = int(Space[1])
+      space1 -= 1
+      space2 -= 1
+      arr[space2][space1] = plate
+  
+  for row in arr:
+    print(row)
+
+def twoDchecker():
+  rows, cols = (6, 4)
+  arr = [["X" for i in range(cols)]for j in range(rows)]
+  arr[0][0] = "O"
+  for row in arr:
+    print(row)
+  O = input("Enter a coordinate  ")
+  arr[0][0] = "X"
+  o = O.split(", ")
+  o1 = int(o[0])
+  o2 = int(o[1])
+  o1 -= 1
+  o2 -= 1
+  arr[o2][o1] = "O"
+  for row in arr:
+    print(row)
+
+def battleships():
+  BP = [" "," "," "]
+  SP = [" "," "]
+  RL = ["", ""]
+  rows, cols = (10, 10)
+  rows2, cols2 = (10, 10)
+  board1 = [[" " for i in range(cols)]for j in range(rows)]
+  board2 = [[" "for k in range(cols2)]for l in range(rows2)]
+  for m in range(3):
+    boat = (input("Enter a coordinate for a boat (1 space)  "))
+    boatS = boat.split(", ")
+    BP[m] = boatS
+  for n in range(2):
+    ship = (input("Enter a coordinate for a ship (2 spaces)  "))
+    shipS = ship.split(", ")
+    SP[n] = shipS
+  for o in range(2):
+    rl = input("Face your ship right or down? (Make sure your ship stays on the board)  ")
+    RL[o] = rl
+  s1 = int(SP[0][0])
+  s2 = int(SP[0][1])
+  s3 = int(SP[1][0])
+  s4 = int(SP[1][1])
+  b1 = int(BP[0][0])
+  b2 = int(BP[0][1])
+  b3 = int(BP[1][0])
+  b4 = int(BP[1][1])
+  b5 = int(BP[2][0])
+  b6 = int(BP[2][1])
+  s1 -= 1
+  s2 -= 1
+  s3 -= 1
+  s4 -= 1
+  b1 -= 1
+  b2 -= 1
+  b3 -= 1
+  b4 -= 1
+  b5 -= 1
+  b6 -= 1
+  
+  board1[b2][b1] = "X"
+  board1[b4][b3] = "X"
+  board1[b6][b5] = "X"
+  if RL[0] == "right":
+    board1[s2][s1] = "X"
+    board1[s2][s1 + 1] = "X"
+  if RL[0] == "down":
+    board1[s2][s1] = "X"
+    board1[s2 + 1][s1] = "X"
+  if RL[1] == "right":
+    board1[s4][s3] = "X"
+    board1[s4][s3 + 1] = "X"
+  if RL[1] == "down":
+    board1[s4][s3] = "X"
+    board1[s4 + 1][s3] = "X"
+
+  print("Player 1")
+  print(" ")
+  for row in board1:
+    print(row)
+    print(" ")
+  print(" ")
+  print("Player 2")
+  print(" ")
+  for row in board2:
+    print(row)
+    print(" ")
+
+def saveToFile(openMode):
+  studentRecord = [studentName, studentMark]
+  testResultsFile = open("studentNamesFile.txt", openMode)
+  studentMark = "0"
+  studentName = input("Enter a student name, xxx to finish: ")
+  while studentName != "xxx":
+    studentMark = int(input("Enter mark: "))
+    write(testResultsFile, studentRecord)
+    studentName = input("Enter a student name, xxx to finish: ")
+  testResultsFile.close()
+
+def calculateAvg():
+
+  testResultsFile = file.open("studentNamesFile.txt", "r")
+  file.read(testResultsFile, studentRecord)
+  total = 0
+  rumRecs = 0
+  while not eof:
+    total += studentMark
+    numRecs += 1
+    file.read(testResultsFile, studentRecord)
+  average = total / numRecs
+  print("Average Mark:", average)
+
+def dispData():
+
+  testResultsFile = file.open("studentNamesFile.txt", "r")
+  file.read(testResultsFile, studentRecord)
+  while not eof:
+    print(studentName, studentMark)
+
+def displayMenu():
+  print("1. Input data and save to new file")
+  print("2. Input data and append to existing file")
+  print("3. Calculate and display average mark")
+  print("4. Display Data")
+  print("5. Quit")
+  choice = int(input("Enter your choice: "))
+  if choice == 1:
+    saveToFile("w")
+  if choice == 2:
+    saveToFile("a")
+  if choice == 3:
+    calculateAvg()
+  if choice == 4:
+    dispData()
+  if choice == 5:
+    print("Program Terminated")
+  return choice
+
+def filetesting():
+  print("nothing here")
+
+def getValue(co2):
+  val = 0
+  try:
+    val = int(co2)
+  except:
+    if co2 == "A":
+      val = 14
+    if co2 == "K":
+      val = 13
+    if co2 == "Q":
+      val = 12
+    else:
+      val = 11
+  return val
+
+
+def NominationWhist():
+  def shuffle(cards):
+    shuffled = []
+    while len(cards) > 0:
+      card = r.choice(cards)
+      shuffled.append(card)
+      cards.remove(card)
+    return shuffled
+
+  vals = ["A","2","3","4","5","6","7","8","9","J","Q","K"]
+  suits = ["H", "D", "C", "S"]
+  cards = []
+  for i in range(len(suits)):
+    for j in range(len(vals)):
+      cards.append(suits[i]+vals[j])
+  print(cards)
+  print(shuffle(cards))
+  
+def sweetbag():
+  bag = int(input("Enter the number of bags: "))
+  sweet = int(input("Enter the number of sweets: "))
+  mod = sweet % bag
+
+  if mod % 2 == 0:
+    print("You can put an odd number of sweets in each bag")
+  else:
+    print("You cannot put an odd number of sweets in each bag")
+
+def menu():
+  # Menu system for more compact and user friendly interface!
+  print(" ")
+  print("=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=")
+  print("Pick a program to run!")
+  print(" ")
+  print("Paint a Room - 0")
+  print("Car Fuel - 1")
+  print("Length of name - 2")
+  print("Books Share - 3")
+  print("Mass Converter - 4")
+  print("Digit Split - 5")
+  print("Password Length - 6")
+  print("Bricks in House - 7")
+  print("Pupil Age Verify - 8")
+  print("Order Value - 9")
+  print("Exam Results - 10")
+  print("Alarm - 11")
+  print("Barcode - 12")
+  print("Test Print - 13")
+  print("Hallowe'en Lights - 14")
+  print("Array Reverse - 15")
+  print("Pupil Names - 16")
+  print("Treasure Hunt - 17")
+  print("Sales Quantities - 18")
+  print("Car Park - 19")
+  print("2D Checker - 20")
+  print("Battleships - 21")
+  print("Test Scores using Files - 22")
+  print(" ")
+  menupick = int(input(""))
+  print("=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=")
+  print(" ")
+  if menupick == 0:
+    Paint()
+  if menupick == 1:
+    Mileage()
+  if menupick == 2:
+    length()
+  if menupick == 3:
+    BookShare()
+  if menupick == 4:
+    PoundsKilos()
+  if menupick == 5:
+    DigitSplit()
+  if menupick == 6:
+    Passwordlen()
+  if menupick == 7:
+    bricksinhouse()
+  if menupick == 8:
+    Pupilage()
+  if menupick == 9:
+    OrderValue()
+  if menupick == 10:
+    Examresults()
+  if menupick == 11:
+    Alarm()
+  if menupick == 12:
+    Barcode()
+  if menupick == 13:
+    testprint()
+  if menupick == 14:
+    Hlight()
+  if menupick == 15:
+    arraynum()
+  if menupick == 16:
+    pupilname()
+  if menupick == 17:
+    TwoDArray()
+  if menupick == 18:
+    SaleQuantities()
+  if menupick == 19:
+    carpark()
+  if menupick == 20:
+    twoDchecker()
+  if menupick == 21:
+    battleships()
+  if menupick == 22:
+    displayMenu()
+  if menupick == 23:
+    filetesting()
+  if menupick == 24:
+    NominationWhist()
+  if menupick == 25:
+    sweetbag()
+  if menupick == 26:
+    menu()
+  if menupick == 27:
+    menu()
+  if menupick == 28:
+    menu()
+menu()
