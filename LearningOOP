@@ -1,0 +1,112 @@
+import time as t
+
+class Creature:
+  def __init__(self, name):
+    self.attackStr = 5
+    self.maxarmour = 5
+    self.armour = 5
+    self.name = name
+    self.maxhealth = 100
+    self.health = 100
+    self.level = 1
+    self.xp = 0
+
+  def levelup(self):
+    if self.xp > 64 and self.xp < 100:
+      print("You are level 2 with "+str(self.xp)+"xp")
+      self.level = 2
+      self.maxarmour += 2
+      self.attackStr += 2
+      self.maxhealth += 5
+    if self.xp > 99 and self.xp < 300:
+      print("You are level 3 with "+str(self.xp)+"xp")
+      self.level = 3
+      self.maxarmour += 2
+      self.attackStr += 2
+      self.maxhealth += 5
+    if self.xp > 299 and self.xp < 600:
+      print("You are level 4 with "+str(self.xp)+"xp")
+      self.level = 4
+      self.maxarmour += 2
+      self.attackStr += 2
+      self.maxhealth += 5
+
+  def creatureDead(self):
+    print(self.name+" is Dead\n")
+
+  def attack(self, myenemy):
+    print(self.name+" is attacking "+myenemy.name)
+    myenemy.defend(self.attackStr)
+
+  def defend(self, attack_hit):
+    attack_damage = attack_hit * (1 - (self.armour)/100)
+    if self.armour > 0:
+      self.armour -= 1
+    self.health -= attack_damage
+
+    if self.health <= 0:
+      print(self.name+" took "+str(attack_damage)+" damage\n")
+      self.creatureDead()
+    else:
+      print(self.name+" took "+str(attack_damage)+" damage "+self.name+"'s health is now "+str(self.health)+"\n")
+
+class Hero(Creature):
+  def __init__(self, name):
+    Creature.__init__(self, name)
+    self.attackStr = 25
+    self.maxarmour = 10
+    self.armour = 10
+
+class Goblin(Creature):
+  def __init__(self, name):
+    Creature.__init__(self, name)
+
+class Orc(Creature):
+  def __init__(self, name):
+    Creature.__init__(self, name)
+    self.attackStr = 10
+    self.armour = 10
+
+class Dragon(Creature):
+  def __init__(self, name):
+    Creature.__init__(self, name)
+    self.attackStr = 30
+    self.armour = 8
+
+player_hero = Hero("Mage the Lord")
+goblin_1 = Goblin("Globin the Goblin")
+Orc1 = Orc("Cragjaw the Orc")
+Dragon = Dragon("Smoldoom the Dragon")
+
+while player_hero.health > 0 and goblin_1.health > 0:
+  # add if statements to stop attacking for no reason
+  player_hero.attack(goblin_1)
+  t.sleep(2)
+  goblin_1.attack(player_hero)
+  t.sleep(2)
+
+player_hero.xp += 25
+player_hero.health = player_hero.maxhealth
+player_hero.armour = 10
+player_hero.levelup()
+print("Your health and armour are restored by a mysterious wizard, it has returned back to "+str(player_hero.health)+"hp and "+str(player_hero.armour)+"ap")
+
+while player_hero.health > 0 and Orc1.health > 0:
+  player_hero.attack(Orc1)
+  t.sleep(2)
+  Orc1.attack(player_hero)
+  t.sleep(2)
+
+player_hero.xp += 50
+player_hero.health = player_hero.maxhealth
+player_hero.armour = 10
+player_hero.levelup()
+print("Your health and armour are restored by a mysterious wizard, it has returned back to "+str(player_hero.health)+"hp and "+str(player_hero.armour)+"ap")
+
+while player_hero.health > 0 and Dragon.health > 0:
+  player_hero.attack(Dragon)
+  t.sleep(2)
+  Dragon.attack(player_hero)
+  t.sleep(2)
+
+print("It seems you were no match for Smoldoom the Dragon, come back later when you are a more powerful adventurer")
