@@ -1,0 +1,106 @@
+def Happy(num, track):
+    sum = 0
+    for i in range(len(str(num))):
+        sum += int(str(num)[i-1])**2
+    if sum in track:
+        return False
+    else:
+        print(track)
+        track.append(sum)
+        Happy(sum, track)
+    if track[-1] == 1:
+        return True
+
+def Harshad(n):
+    x = 1
+    harshad = []
+    for i in range(n):
+        calc = True
+        while calc:
+            sum = 0
+            for j in range(len(str(x))):
+                sum += int(str(x)[j-1])
+            if x % sum == 0:
+                harshad.append(x)
+                calc = False
+            x += 1
+    return(harshad[n-1])
+
+def Tribonacci(n):
+    tri = [0, 1, 1]
+    while n > len(tri):
+        tri.append(tri[-1] + tri[-2] + tri[-3])
+    return tri[-1]        
+
+def Roman(num):
+    #digits = [["I","V","X"],["X","L","C"],["C","D","M"]]
+    track = []
+    result = ""
+    for i in range(len(str(num))):
+        track.append(str(num)[i])
+    try:
+        x3 = track[-3]
+        if int(x3) < 4:
+            for i in range(int(x3)):
+                result += "C"
+        elif int(x3) < 9 and int(x3) > 4:
+            result += "D"
+            for i in range(int(x3)-5):
+                result += "C"
+        elif int(x3) == 4:
+            result += "CD"
+        else:
+            result += "CM"
+    except:
+        pass
+    try:
+        x2 = track[-2]
+        if int(x2) < 4:
+            for i in range(int(x2)):
+                result += "X"
+        elif int(x2) < 9 and int(x2) > 4:
+            result += "L"
+            for i in range(int(x2)-5):
+                result += "X"
+        elif int(x2) == 4:
+            result += "XL"
+        else:
+            result += "XC"
+    except:
+        pass
+    x1 = track[-1]
+    if int(x1) < 4:
+        for i in range(int(x1)):
+            result += "I"
+    elif int(x1) < 9 and int(x1) > 4:
+        result += "V"
+        for i in range(int(x1)-5):
+            result += "I"
+    elif int(x1) == 4:
+        result += "IV"
+    else:
+        result += "IX"
+    if num == 1000:
+        result += "M"
+    return result
+
+def enterNum():
+    menu = input("Har/Hap/Tri/Rom: ")
+    if menu == "Har":
+        n = int(input("Enter nth term: "))
+        print(Harshad(n), "is the", str(n)+"th term")
+    if menu == "Hap":
+        track = []
+        num = int(input("Enter a number: "))
+        x = Happy(num, track)
+        if x:
+            print(num, "is a happy number")
+        else:
+            print(num, "is not a happy number")
+    if menu == "Tri":
+        n = int(input("Enter nth term: "))
+        print(Tribonacci(n), "is the", str(n)+"th term")
+    if menu == "Rom":
+        num = int(input("Enter a number up to 1000: "))
+        print(num, "in roman numerals is", Roman(num))
+enterNum()
