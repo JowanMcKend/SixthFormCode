@@ -1,0 +1,14 @@
+n = int(input("nth term "))
+x = 1
+harshad = []
+for i in range(n):
+    calc = True
+    while calc:
+        sum = 0
+        for j in range(len(str(x))):
+            sum += int(str(x)[j-1])
+        if x % sum == 0:
+            harshad.append(x)
+            calc = False
+        x += 1
+print(harshad[n-1])
