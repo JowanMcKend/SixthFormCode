@@ -1,0 +1,178 @@
+import tkinter as tk
+import random as r
+import time
+
+def mazegeneratortk():
+  maze = []
+
+  def listgen():
+    for i in range(15):
+      templist = []
+      for l in range(15):
+        wall = r.randint(0,1)
+        if i == 0 or i == 14 or l == 0 or l == 14:
+          my_char = -1
+        else:
+          randnum = r.randint(1,5)
+          if randnum > 2:
+            my_char = 0
+          else:
+            my_char = -1
+
+        templist.append(my_char)
+      maze.append(templist)
+
+  def stringgen():
+    for i in range(len(maze)):
+      my_string = " "
+      for l in range(len(maze[i])):
+        my_char = str(maze[i][l])
+        if maze[i][l] == -1:
+          my_char = "x"
+        else:
+          my_char = "."
+        my_string = my_string + my_char + " "
+      print(my_string)
+
+  def guigen():
+    for i in range(len(maze)):
+      for l in range(len(maze)):
+        if maze[i][l] == -1:
+          square = tk.Label(window, text = "    ", bg = "darkgreen")
+        else:
+          square = tk.Label(window, text = "    ", bg = "green")
+        square.grid(row = l, column = i)
+
+  window = tk.Tk()
+  listgen()
+  guigen()
+  stringgen()
+  window.mainloop()
+
+def greeting():
+  def changeText():
+    text = greeting.cget("text")
+    if text == "Hello":
+      greeting.config(text = "Goodbye")
+    else:
+      greeting.config(text = "Hello")
+
+  window = tk.Tk()
+  greeting = tk.Button(text="Hello", fg = "#9c1a00", bg = "#2e0800", command = changeText)
+  greeting.pack()
+  window.mainloop()
+
+def usergreeting():
+  def Greetpress():
+    name = entry.get()
+    Instruction.config(text = "Hello, " + name)
+  window = tk.Tk()
+  Instruction = tk.Label(text = "Enter your name")
+  Instruction.pack()
+  entry = tk.Entry()
+  entry.pack()
+  Greet = tk.Button(text = "Enter", command = Greetpress)
+  Greet.pack()
+  window.mainloop()
+
+def calculator():
+  def add():
+    num1 = entry1.get()
+    num2 = entry2.get()
+    ans = int(num1) + int(num2)
+    answer.config(text = ans)
+  def sub():
+    num1 = entry1.get()
+    num2 = entry2.get()
+    ans = int(num1) - int(num2)
+    answer.config(text = ans)
+  def mult():
+    num1 = entry1.get()
+    num2 = entry2.get()
+    ans = int(num1) * int(num2)
+    answer.config(text = ans)
+  def div():
+    num1 = entry1.get()
+    num2 = entry2.get()
+    ans = int(num1) / int(num2)
+    #ans = int(ans)
+    answer.config(text = ans)
+  def clear():
+    entry1.delete(0, tk.END)
+    entry2.delete(0, tk.END)
+    answer.config(text = "     ", fg = "#00c711")
+  window = tk.Tk()
+  Enter1 = tk.Label(text = "Enter your first number ")
+  Enter1.pack()
+  entry1 = tk.Entry()
+  entry1.pack()
+  Enter2 = tk.Label(text = "Enter your second number ")
+  Enter2.pack()
+  entry2 = tk.Entry()
+  entry2.pack()
+  answer = tk.Label(text = "     ", fg = "#00c711")
+  answer.pack()
+  Add = tk.Button(text = "Add", command = add)
+  Add.pack()
+  Sub = tk.Button(text = "Subtract", command = sub)
+  Sub.pack()
+  Mult = tk.Button(text = "Multiply", command = mult)
+  Mult.pack()
+  Div = tk.Button(text = "Divide", command = div)
+  Div.pack()
+  Clear = tk.Button(text = "Clear", command = clear)
+  Clear.pack()
+  window.mainloop()
+
+def details():
+  def harvest():
+    ent1 = Colour.get()
+    ent2 = Biscuit.get()
+    ent3 = Pet.get()
+
+    Colour.delete(0, tk.END)
+    Biscuit.delete(0, tk.END)
+    Pet.delete(0, tk.END)
+
+    f = open("data.txt", "a")
+    f.write(ent1 + "\n" + ent2 + "\n" + ent3 + "\n")
+    f.close()
+
+  window = tk.Tk()
+
+  frame = tk.Frame(window, padx = 5, pady = 3)
+  frame.grid(row = 0, column = 0)
+  tk.Label(frame, text = "Favourite Colour").pack()
+  tk.Label(frame, text = "Favourite Biscuit").pack()
+  tk.Label(frame, text = "Pet Name").pack()
+
+  frame2 = tk.Frame(window, padx = 5, pady = 3)
+  frame2.grid(row = 0, column = 1)
+  Colour = tk.Entry(frame2)
+  Colour.pack()
+  Biscuit = tk.Entry(frame2)
+  Biscuit.pack()
+  Pet = tk.Entry(frame2)
+  Pet.pack()
+
+  frame3 = tk.Frame(window, padx = 5, pady = 3)
+  frame3.grid(row = 1, column = 1)
+  tk.Button(frame3, text = "Submit", command = harvest).pack()
+
+  window.mainloop()
+
+def menu():
+  print("Choose a program\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nTK Maze - 1\nGreeting - 2\nCalculator - 3\nNamed Greeting - 4\nData Harvesting - 5")
+  choice = int(input(" "))
+  if choice == 1:
+    mazegeneratortk()
+  if choice == 2:
+    greeting()
+  if choice == 3:
+    calculator()
+  if choice == 4:
+    usergreeting()
+  if choice == 5:
+    details()
+
+menu()
