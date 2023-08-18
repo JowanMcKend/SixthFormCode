@@ -1,0 +1,30 @@
+import random as r
+
+my_maze = []
+
+def listgen():
+  for i in range(15):
+    templist = []
+    for l in range(15):
+      wall = r.randint(0,1)
+      if i == 0 or i == 14 or l == 0 or l == 14:
+        my_char = -1
+      else:
+        my_char = 0
+      templist.append(my_char)
+    my_maze.append(templist)
+
+def stringgen():
+  for i in range(len(my_maze)):
+    my_string = " "
+    for l in range(len(my_maze[i])):
+      my_char = str(my_maze[i][l])
+      if my_maze[i][l] == -1:
+        my_char = "x"
+      else:
+        my_char = "."
+      my_string = my_string + my_char + " "
+    print(my_string)
+
+listgen()
+stringgen()
